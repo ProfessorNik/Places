@@ -2,12 +2,9 @@ package me.nikol.places.service
 
 import io.ktor.client.*
 import kotlinx.coroutines.*
-import me.nikol.places.getLocations
-import me.nikol.places.interestingPlaceKind
 import me.nikol.places.kinds.Description
 import me.nikol.places.placesandcountries.Locations
 import me.nikol.places.placesandcountries.Place
-import me.nikol.places.readNextIntFromCli
 import java.util.*
 
 interface Handler {
@@ -96,7 +93,7 @@ class GetDescriptions(private val client: HttpClient) : Handler {
 }
 
 fun <E> readChoiceElementOfList(list: List<E>): E {
-    when (val choice = readNextIntFromCli()) {
+    when (val choice = Scanner(System.`in`).nextInt()) {
         in list.indices -> {
             return list[choice]
         }
