@@ -11,7 +11,7 @@ interface Handler {
     suspend fun handle(data: ResponseData)
 }
 
-class GetLocationsHandler(private val client: HttpClient) : Handler {
+class GetLocations(private val client: HttpClient) : Handler {
     override suspend fun handle(data: ResponseData) {
         val locations: Locations = RequestExecutor(client, LocationsPathBuilder(readPlaceNameFromCli())).execute()
 
@@ -36,7 +36,7 @@ class GetLocationsHandler(private val client: HttpClient) : Handler {
     }
 }
 
-class GetWeatherHandler(private val client: HttpClient) : Handler {
+class GetWeather(private val client: HttpClient) : Handler {
     override suspend fun handle(data: ResponseData) = coroutineScope {
         data.weatherDeferred = async {
             RequestExecutor(client, WeatherPathBuilder(data.place)).execute()
@@ -44,7 +44,7 @@ class GetWeatherHandler(private val client: HttpClient) : Handler {
     }
 }
 
-class GetInterestingPlacesHandler(private val client: HttpClient) : Handler {
+class GetInterestingPlaces(private val client: HttpClient) : Handler {
     override suspend fun handle(data: ResponseData) = coroutineScope {
         data.interestingPlacesDeferred = async {
             RequestExecutor(client, InterestingPlacesPathBuilder(data.place)).execute()
@@ -52,7 +52,7 @@ class GetInterestingPlacesHandler(private val client: HttpClient) : Handler {
     }
 }
 
-class PrintWeatherHandler() : Handler {
+class PrintWeather() : Handler {
     override suspend fun handle(data: ResponseData) {
         val weather = data.weatherDeferred.await()
         println("Weather: ${weather.weather!![0].description}, temp: ${weather.main?.temp}")

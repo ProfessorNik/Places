@@ -32,10 +32,10 @@ suspend fun main() = coroutineScope {
 
 fun configuration(client: HttpClient): List<Handler> {
     return listOf(
-        GetLocationsHandler(client),
-        GetWeatherHandler(client),
-        GetInterestingPlacesHandler(client),
-        PrintWeatherHandler(),
+        GetLocations(client),
+        GetWeather(client),
+        GetInterestingPlaces(client),
+        PrintWeather(),
         PrintInterestingLocations(),
         GetDescriptions(client)
     )

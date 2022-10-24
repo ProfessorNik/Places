@@ -8,4 +8,4 @@
 
 # How to Run
 
-`gradle run`
+`gradle run --console=plain`

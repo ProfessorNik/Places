@@ -6,6 +6,10 @@ plugins {
     application
 }
 
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
 group = "me.nikol"
 version = "1.0-SNAPSHOT"
 
